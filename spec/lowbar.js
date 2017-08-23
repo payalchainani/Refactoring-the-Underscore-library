@@ -1,4 +1,3 @@
-/* global describe, it */
 var path = require('path');
 var expect = require('chai').expect;
 
