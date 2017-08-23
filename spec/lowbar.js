@@ -63,27 +63,55 @@ describe('_', function () {
     });
   });
 
-  describe.only('#each', function () {
+  describe('#each', function () {
     it('is a function', function () {
       expect(_.each).to.be.a('function');
     });
     
     it('works for an array', function () {  
       let count = 0;
-      function incCount (){
+      function incCount () {
         count ++;
       }
       _.each([1,2,3],incCount);
       expect(count).to.equal(3);
     });
 
-    it('check returns first call', function () {
+    it('check returns first, second and third call', function () {
       const spy = sinon.spy();
       _.each([1,2,3], spy);
       expect(spy.firstCall.calledWithExactly(1,0,[1,2,3])).to.equal(true);
       expect(spy.secondCall.calledWithExactly(2,1,[1,2,3])).to.equal(true);
       expect(spy.thirdCall.calledWithExactly(3,2,[1,2,3])).to.equal(true);
+    });
+  });
 
+  describe.only('#indexOf', function () {
+    it('is a function', function() {
+      expect(_.indexOf).to.be.a('function');
+    });
+    it('returns index of value', function () {
+      var result = _.indexOf ([1,2,3], 2);
+      var expected = 1;
+      expect(result).to.equal(expected);
+    });
+
+    it('returns -1 if value is not in array', function () {
+      var result = _.indexOf ([1,2,3], 4);
+      var expected = -1;
+      expect(result).to.equal(expected);
+    });
+
+    it('returns index of a string', function () {
+      var result = _.indexOf ('hello', 'o');
+      var expected = 4;
+      expect(result).to.equal(expected);
+    });
+
+    it('returns index of search value after given index(3rd arg)', function () {
+      var result = _.indexOf ([1,2,3,4,5,6], 5, 2 );
+      var expected = 2;
+      expect(result).to.equal(expected);
     });
   });
 });

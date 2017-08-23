@@ -20,4 +20,17 @@ _.each = function (list, fn) {
  } 
 };
 
+_.indexOf = function (arr, value, index) {
+  if (index !== undefined) {
+    arr = arr.slice(index);
+  }
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] === value) {
+      return i;
+    }
+  }
+  return -1;
+  
+ };
+
 module.exports = _;
