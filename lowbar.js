@@ -9,5 +9,12 @@ _.first = function (list, n) {
   return list.slice(0,n);
 };
 
+_.last = function (list, n) {
+  if (n === undefined) return Number(list.slice(-1));
+  return list.slice(list.length - n);
+};
+
+
+
 
 module.exports = _;
