@@ -1,5 +1,6 @@
 var path = require('path');
 var expect = require('chai').expect;
+var sinon = require('sinon');
 
 var _ = require(path.join(__dirname, '..', './lowbar.js'));
 
@@ -59,6 +60,30 @@ describe('_', function () {
       var result = _.last ('hello', 2);
       var expected = 'lo';
       expect(result).to.equal(expected);
+    });
+  });
+
+  describe.only('#each', function () {
+    it('is a function', function () {
+      expect(_.each).to.be.a('function');
+    });
+    
+    it('works for an array', function () {  
+      let count = 0;
+      function incCount (){
+        count ++;
+      }
+      _.each([1,2,3],incCount);
+      expect(count).to.equal(3);
+    });
+
+    it('check returns first call', function () {
+      const spy = sinon.spy();
+      _.each([1,2,3], spy);
+      expect(spy.firstCall.calledWithExactly(1,0,[1,2,3])).to.equal(true);
+      expect(spy.secondCall.calledWithExactly(2,1,[1,2,3])).to.equal(true);
+      expect(spy.thirdCall.calledWithExactly(3,2,[1,2,3])).to.equal(true);
+
     });
   });
 });

@@ -14,7 +14,10 @@ _.last = function (list, n) {
   return list.slice(list.length - n);
 };
 
-
-
+_.each = function (list, fn) {
+ for (let i = 0; i < list.length; i++) {
+    fn(list[i], i, list);
+ } 
+};
 
 module.exports = _;
