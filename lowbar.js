@@ -4,6 +4,4 @@ _.identity = function() {
   // your code here 
 };
 
-if (typeof module !== 'undefined') {
-  module.exports = _;
-}
+module.exports = _;
