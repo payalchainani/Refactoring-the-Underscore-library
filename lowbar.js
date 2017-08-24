@@ -15,9 +15,16 @@ _.last = function (list, n) {
 };
 
 _.each = function (list, fn) {
- for (let i = 0; i < list.length; i++) {
-    fn(list[i], i, list);
- } 
+  if (Array.isArray(list)) {
+    for (var i = 0; i < list.length; i++) {
+      fn(list[i], i, list);
+    }
+  } 
+  else {
+    for (var key in list) {
+      fn(list[key], key, list);
+    }
+  }  
 };
 
 _.indexOf = function (arr, value, index) {
@@ -30,7 +37,47 @@ _.indexOf = function (arr, value, index) {
     }
   }
   return -1;
-  
  };
+
+ _.filter = function (list, fn) {
+   var resultArr = [];
+   _.each(list, function (value, index, list) {
+    if (fn(value, index, list)) resultArr.push(value);
+   });
+   return resultArr;
+  }; 
+   
+  _.reject = function (list, fn) {
+    var resultArr = [];
+    
+    _.each(list, function (value, index, list) {
+      if (!fn(value, index, list)) resultArr.push(value);
+     });
+     return resultArr;
+   };  
+   
+  _.uniq = function (arr, fn) {
+     var resultArr = [];
+     for (let i = 0; i < arr.length; i++) {
+       if (resultArr.indexOf(arr[i]) == -1) {
+         resultArr.push(arr[i]);
+       }
+     }
+     // return resultArr if no fn given;
+     if (fn === undefined) {
+       return resultArr;
+     }
+     return resultArr.filter(fn);
+   };
+
+  _.map = function (list, fn) {
+    var resultArr = [];
+    
+    _.each(list, function (value) { 
+      resultArr.push(fn(value));
+     });
+     return resultArr; 
+  };
+  
 
 module.exports = _;

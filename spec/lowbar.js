@@ -84,9 +84,23 @@ describe('_', function () {
       expect(spy.secondCall.calledWithExactly(2,1,[1,2,3])).to.equal(true);
       expect(spy.thirdCall.calledWithExactly(3,2,[1,2,3])).to.equal(true);
     });
+
+    it('check returns first, second and third call for objects', function () {
+      const spy = sinon.spy();
+      _.each({one:1, two:2, three:3}, spy);
+      expect(spy.firstCall.calledWithExactly(1,'one',{one:1, two:2, three:3})).to.equal(true);
+      expect(spy.secondCall.calledWithExactly(2,'two',{one:1, two:2, three:3})).to.equal(true);
+      expect(spy.thirdCall.calledWithExactly(3,'three',{one:1, two:2, three:3})).to.equal(true);
+    });
+
+    it('checks function was called three times', function () {
+      const spy = sinon.spy();
+      _.each({one:1, two:2, three:3}, spy);
+      expect(spy.calledThrice).to.equal(true);
+    });
   });
 
-  describe.only('#indexOf', function () {
+  describe('#indexOf', function () {
     it('is a function', function() {
       expect(_.indexOf).to.be.a('function');
     });
@@ -114,4 +128,75 @@ describe('_', function () {
       expect(result).to.equal(expected);
     });
   });
+
+  describe('#filter', function () {
+    it('is a function', function () {
+      expect(_.filter).to.be.a('function');
+    });
+
+    it('filters only items that meet truth criteria', function () { 
+      
+      function testFilter (value) {
+         return value === 3;
+      }
+      expect(_.filter([1,2,3], testFilter)).to.eql([3]);
+      
+    });
+  });
+
+  describe('#reject', function () {
+    it('is a function', function () {
+      expect(_.reject).to.be.a('function');
+    });
+
+    it('filters only items that are false', function () {
+      
+      function testReject (value) {
+        return value === 3;
+     }
+     expect(_.reject([1,2,3], testReject)).to.eql([1,2]);
+
+    });
+  });
+
+  describe('#uniq', function () {
+    it('is a function', function () {
+      expect(_.uniq).to.be.a('function');
+    });
+
+    it('returns array of unique values when no function arg given', function () {
+      var result = _.uniq([1,3,2,1,2,4,5]);
+      var expected = [1,3,2,4,5];
+      expect(result).to.eql(expected);
+    });
+
+    it('returns array of unique values with iteratee fn', function () {
+      function testUniq(value) {
+        return value % 2 === 0;
+      }
+      expect(_.uniq([1,3,2,2,4,5,7,8], testUniq)).to.eql([2,4,8]);
+    });
+  });
+
+  describe.only('#map', function () {
+    it('is a function', function () {
+      expect(_.map).to.be.a('function');
+    });
+
+    it('returns new array with modified items', function () {
+      function testMap(value) {
+        return value * 2;
+      }
+      expect(_.map([1,2,3], testMap)).to.eql([2,4,6]);
+    });
+
+    it('returns new array with modified items from object', function () {
+      function testMap(value) {
+        return value * 2;
+      }
+      expect(_.map({a:1, b:2, c:3}, testMap)).to.eql([2, 4, 6]);
+    });
+  });
+
 });
+
