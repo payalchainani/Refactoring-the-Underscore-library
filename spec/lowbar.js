@@ -178,7 +178,7 @@ describe('_', function () {
     });
   });
 
-  describe.only('#map', function () {
+  describe('#map', function () {
     it('is a function', function () {
       expect(_.map).to.be.a('function');
     });
@@ -198,5 +198,33 @@ describe('_', function () {
     });
   });
 
+  describe.only('#contains', function () {
+    it('is a function', function () {
+      expect(_.contains).to.be.a('function');
+    });
+
+    it('if fromIndex is not given, start from index 0', function () {
+      var result = _.contains([1,2,3,4,5], 3);
+      var expected = true;
+      expect(result).to.equal(expected);
+    });
+    it('returns true if value is found in array from index number', function () {
+      var result = _.contains([1,2,3,4,5], 3, 1);
+      var expected = true;
+      expect(result).to.equal(expected);
+    });
+      
+    it('returns false if value is not found in array', function () {
+      var result = _.contains([1,2,3,4,5], 3, 3);
+      var expected = false;
+      expect(result).to.equal(expected);
+    });
+
+    it('works for strings', function () {
+      var result = _.contains('hello', 'l', 1);
+      var expected = true;
+      expect(result).to.equal(expected);
+    });
+  });
 });
 

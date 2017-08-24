@@ -78,6 +78,12 @@ _.indexOf = function (arr, value, index) {
      });
      return resultArr; 
   };
-  
 
+  _.contains = function (list, value, fromIndex) {
+    if (typeof fromIndex !== 'number') {
+      fromIndex = 0;
+    }
+    return _.indexOf(list, value, fromIndex) >= 0;
+  };
+  
 module.exports = _;
