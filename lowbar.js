@@ -98,4 +98,11 @@ _.indexOf = function (arr, value, index) {
     return arr;
   };
   
+  _.reduce = function (list, fn, memo) {
+    memo = 0;
+    for (let i = 0; i < list.length; i++) {
+      memo = fn(list[i], memo);
+    }
+    return memo;
+  };
 module.exports = _;

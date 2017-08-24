@@ -227,7 +227,7 @@ describe('_', function () {
     });
   });
 
-  describe.only('#pluck', function () {
+  describe('#pluck', function () {
     it('is a function', function () {
       expect(_.pluck).to.be.a('function');
     });
@@ -241,6 +241,18 @@ describe('_', function () {
       var expected = ['moe', 'larry', 'curly'];
       expect(result).to.eql(expected);
     });
+  });
+
+  describe.only('#reduce', function () {
+    it('is a function', function () {
+      expect(_.reduce).to.be.a('function');
+    });
+    it('', function () {
+      function testReduce(x, memo){
+        return memo + x;
+      }
+      expect(_.reduce([1,2,3], testReduce, 0)).to.equal(6);
+    })
   });
 });
 
