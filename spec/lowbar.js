@@ -198,7 +198,7 @@ describe('_', function () {
     });
   });
 
-  describe.only('#contains', function () {
+  describe('#contains', function () {
     it('is a function', function () {
       expect(_.contains).to.be.a('function');
     });
@@ -224,6 +224,22 @@ describe('_', function () {
       var result = _.contains('hello', 'l', 1);
       var expected = true;
       expect(result).to.equal(expected);
+    });
+  });
+
+  describe.only('#pluck', function () {
+    it('is a function', function () {
+      expect(_.pluck).to.be.a('function');
+    });
+
+    it('returns an array', function () {
+      expect(_.pluck([])).to.eql([]);
+    });
+
+    it('returns values from specified keyName', function () {
+      var result = _.pluck([{name: 'moe', age: 40}, {name: 'larry', age: 50}, {name: 'curly', age: 60}], 'name');
+      var expected = ['moe', 'larry', 'curly'];
+      expect(result).to.eql(expected);
     });
   });
 });

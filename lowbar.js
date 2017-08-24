@@ -85,5 +85,17 @@ _.indexOf = function (arr, value, index) {
     }
     return _.indexOf(list, value, fromIndex) >= 0;
   };
+
+  _.pluck = function (list, keyName) {
+    
+    var arr = [];
+    // for each object in array
+    for (let i = 0; i < list.length; i++) {
+      for (var key in list[i]) {
+        if (key === keyName) arr.push(list[i][key]);
+      }
+    }
+    return arr;
+  };
   
 module.exports = _;
